@@ -1,0 +1,1498 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "B Api Documentation",
+    "version" : "1.0",
+    "title" : "B Api Documentation",
+    "termsOfService" : "urn:tos",
+    "contact" : { },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
+  "host" : "35.166.48.189:8080",
+  "basePath" : "/scan",
+  "tags" : [ {
+    "name" : "scan-controller",
+    "description" : "Scan Controller"
+  }, {
+    "name" : "amqp-controller",
+    "description" : "Amqp Controller"
+  } ],
+  "paths" : {
+    "/amqp/createScanQueues" : {
+      "put" : {
+        "tags" : [ "amqp-controller" ],
+        "summary" : "createQueues",
+        "operationId" : "createQueuesUsingPUT",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Access-Token",
+          "in" : "header",
+          "description" : "Token for Authentication",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "If-None-Match",
+          "in" : "header",
+          "description" : "If-None-Match header for ETag",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "customerIdEventIdVO",
+          "description" : "customerIdEventIdVO",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CustomerIdEventIdVO"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResponseOfVoid"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "ETag" : {
+                "type" : "string"
+              }
+            }
+          },
+          "201" : {
+            "description" : "Created"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "304" : {
+            "description" : "Not Modified"
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "http",
+          "httpMethod" : "PUT",
+          "passthroughBehavior" : "when_no_match",
+          "uri" : "https://${stageVariables.URI_ELB}/B/amqp/createScanQueues",
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'*'",
+                "method.response.header.ETag" : "integration.response.header.ETag"
+              }
+            },
+            "304" : {
+              "statusCode" : "304"
+            }
+          },
+          "requestParameters" : {
+            "integration.request.header.Access-Token" : "method.request.header.Access-Token",
+            "integration.request.header.If-None-Match" : "method.request.header.If-None-Match"
+          }
+        },
+        "security" : [ {
+          "UserPool_DEV" : [ ]
+        } ]
+      },
+      "options" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'PUT,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,Access-Token'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "mock"
+        }
+      }
+    },
+    "/amqp/createScannerExchange" : {
+      "put" : {
+        "tags" : [ "amqp-controller" ],
+        "summary" : "createScannerExchange",
+        "operationId" : "createScannerExchangeUsingPUT",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Access-Token",
+          "in" : "header",
+          "description" : "Token for Authentication",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "If-None-Match",
+          "in" : "header",
+          "description" : "If-None-Match header for ETag",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "customerId",
+          "in" : "query",
+          "description" : "customerId",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResponseOfVoid"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "ETag" : {
+                "type" : "string"
+              }
+            }
+          },
+          "201" : {
+            "description" : "Created"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "304" : {
+            "description" : "Not Modified"
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "http",
+          "httpMethod" : "PUT",
+          "passthroughBehavior" : "when_no_match",
+          "uri" : "https://${stageVariables.URI_ELB}/B/amqp/createScannerExchange",
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'*'",
+                "method.response.header.ETag" : "integration.response.header.ETag"
+              }
+            },
+            "304" : {
+              "statusCode" : "304"
+            }
+          },
+          "requestParameters" : {
+            "integration.request.header.Access-Token" : "method.request.header.Access-Token",
+            "integration.request.header.If-None-Match" : "method.request.header.If-None-Match"
+          }
+        },
+        "security" : [ {
+          "UserPool_DEV" : [ ]
+        } ]
+      },
+      "options" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'PUT,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,Access-Token'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "mock"
+        }
+      }
+    },
+    "/amqp/createScannerQueue" : {
+      "put" : {
+        "tags" : [ "amqp-controller" ],
+        "summary" : "createScannerQueue",
+        "operationId" : "createScannerQueueUsingPUT",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Access-Token",
+          "in" : "header",
+          "description" : "Token for Authentication",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "If-None-Match",
+          "in" : "header",
+          "description" : "If-None-Match header for ETag",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "customerId",
+          "in" : "query",
+          "description" : "customerId",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "eventId",
+          "in" : "query",
+          "description" : "eventId",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResponseOfVoid"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "ETag" : {
+                "type" : "string"
+              }
+            }
+          },
+          "201" : {
+            "description" : "Created"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "304" : {
+            "description" : "Not Modified"
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "http",
+          "httpMethod" : "PUT",
+          "passthroughBehavior" : "when_no_match",
+          "uri" : "https://${stageVariables.URI_ELB}/B/amqp/createScannerQueue",
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'*'",
+                "method.response.header.ETag" : "integration.response.header.ETag"
+              }
+            },
+            "304" : {
+              "statusCode" : "304"
+            }
+          },
+          "requestParameters" : {
+            "integration.request.header.Access-Token" : "method.request.header.Access-Token",
+            "integration.request.header.If-None-Match" : "method.request.header.If-None-Match"
+          }
+        },
+        "security" : [ {
+          "UserPool_DEV" : [ ]
+        } ]
+      },
+      "options" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'PUT,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,Access-Token'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "mock"
+        }
+      }
+    },
+    "/amqp/createUpdateExchange" : {
+      "put" : {
+        "tags" : [ "amqp-controller" ],
+        "summary" : "createUpdateExchange",
+        "operationId" : "createUpdateExchangeUsingPUT",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Access-Token",
+          "in" : "header",
+          "description" : "Token for Authentication",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "If-None-Match",
+          "in" : "header",
+          "description" : "If-None-Match header for ETag",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "customerId",
+          "in" : "query",
+          "description" : "customerId",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResponseOfVoid"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "ETag" : {
+                "type" : "string"
+              }
+            }
+          },
+          "201" : {
+            "description" : "Created"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "304" : {
+            "description" : "Not Modified"
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "http",
+          "httpMethod" : "PUT",
+          "passthroughBehavior" : "when_no_match",
+          "uri" : "https://${stageVariables.URI_ELB}/B/amqp/createUpdateExchange",
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'*'",
+                "method.response.header.ETag" : "integration.response.header.ETag"
+              }
+            },
+            "304" : {
+              "statusCode" : "304"
+            }
+          },
+          "requestParameters" : {
+            "integration.request.header.Access-Token" : "method.request.header.Access-Token",
+            "integration.request.header.If-None-Match" : "method.request.header.If-None-Match"
+          }
+        },
+        "security" : [ {
+          "UserPool_DEV" : [ ]
+        } ]
+      },
+      "options" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'PUT,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,Access-Token'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "mock"
+        }
+      }
+    },
+    "/amqp/createUpdateQueue" : {
+      "put" : {
+        "tags" : [ "amqp-controller" ],
+        "summary" : "createUpdateQueue",
+        "operationId" : "createUpdateQueueUsingPUT",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Access-Token",
+          "in" : "header",
+          "description" : "Token for Authentication",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "If-None-Match",
+          "in" : "header",
+          "description" : "If-None-Match header for ETag",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "customerId",
+          "in" : "query",
+          "description" : "customerId",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "eventId",
+          "in" : "query",
+          "description" : "eventId",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResponseOfVoid"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "ETag" : {
+                "type" : "string"
+              }
+            }
+          },
+          "201" : {
+            "description" : "Created"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "304" : {
+            "description" : "Not Modified"
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "http",
+          "httpMethod" : "PUT",
+          "passthroughBehavior" : "when_no_match",
+          "uri" : "https://${stageVariables.URI_ELB}/B/amqp/createUpdateQueue",
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'*'",
+                "method.response.header.ETag" : "integration.response.header.ETag"
+              }
+            },
+            "304" : {
+              "statusCode" : "304"
+            }
+          },
+          "requestParameters" : {
+            "integration.request.header.Access-Token" : "method.request.header.Access-Token",
+            "integration.request.header.If-None-Match" : "method.request.header.If-None-Match"
+          }
+        },
+        "security" : [ {
+          "UserPool_DEV" : [ ]
+        } ]
+      },
+      "options" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'PUT,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,Access-Token'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "mock"
+        }
+      }
+    },
+    "/amqp/listenScannerQueue" : {
+      "put" : {
+        "tags" : [ "amqp-controller" ],
+        "summary" : "listenScannerQueue",
+        "operationId" : "listenScannerQueueUsingPUT",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Access-Token",
+          "in" : "header",
+          "description" : "Token for Authentication",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "If-None-Match",
+          "in" : "header",
+          "description" : "If-None-Match header for ETag",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "customerId",
+          "in" : "query",
+          "description" : "customerId",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "eventId",
+          "in" : "query",
+          "description" : "eventId",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResponseOfVoid"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "ETag" : {
+                "type" : "string"
+              }
+            }
+          },
+          "201" : {
+            "description" : "Created"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "304" : {
+            "description" : "Not Modified"
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "http",
+          "httpMethod" : "PUT",
+          "passthroughBehavior" : "when_no_match",
+          "uri" : "https://${stageVariables.URI_ELB}/B/amqp/listenScannerQueue",
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'*'",
+                "method.response.header.ETag" : "integration.response.header.ETag"
+              }
+            },
+            "304" : {
+              "statusCode" : "304"
+            }
+          },
+          "requestParameters" : {
+            "integration.request.header.Access-Token" : "method.request.header.Access-Token",
+            "integration.request.header.If-None-Match" : "method.request.header.If-None-Match"
+          }
+        },
+        "security" : [ {
+          "UserPool_DEV" : [ ]
+        } ]
+      },
+      "options" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'PUT,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,Access-Token'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "mock"
+        }
+      }
+    },
+    "/amqp/listenUpdateQueue" : {
+      "put" : {
+        "tags" : [ "amqp-controller" ],
+        "summary" : "listenUpdateQueue",
+        "operationId" : "listenUpdateQueueUsingPUT_1",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Access-Token",
+          "in" : "header",
+          "description" : "Token for Authentication",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "If-None-Match",
+          "in" : "header",
+          "description" : "If-None-Match header for ETag",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "customerId",
+          "in" : "query",
+          "description" : "customerId",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "eventId",
+          "in" : "query",
+          "description" : "eventId",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResponseOfVoid"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "ETag" : {
+                "type" : "string"
+              }
+            }
+          },
+          "201" : {
+            "description" : "Created"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "304" : {
+            "description" : "Not Modified"
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "http",
+          "httpMethod" : "PUT",
+          "passthroughBehavior" : "when_no_match",
+          "uri" : "https://${stageVariables.URI_ELB}/B/amqp/listenUpdateQueue",
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'*'",
+                "method.response.header.ETag" : "integration.response.header.ETag"
+              }
+            },
+            "304" : {
+              "statusCode" : "304"
+            }
+          },
+          "requestParameters" : {
+            "integration.request.header.Access-Token" : "method.request.header.Access-Token",
+            "integration.request.header.If-None-Match" : "method.request.header.If-None-Match"
+          }
+        },
+        "security" : [ {
+          "UserPool_DEV" : [ ]
+        } ]
+      },
+      "options" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'PUT,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,Access-Token'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "mock"
+        }
+      }
+    },
+    "/amqp/removeQueues/{customerId}/{eventId}" : {
+      "delete" : {
+        "tags" : [ "amqp-controller" ],
+        "summary" : "removeQueues",
+        "operationId" : "removeQueuesUsingDELETE_1",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Access-Token",
+          "in" : "header",
+          "description" : "Token for Authentication",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "If-None-Match",
+          "in" : "header",
+          "description" : "If-None-Match header for ETag",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "customerId",
+          "in" : "path",
+          "description" : "customerId",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "eventId",
+          "in" : "path",
+          "description" : "eventId",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResponseOfVoid"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "ETag" : {
+                "type" : "string"
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "204" : {
+            "description" : "No Content"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "304" : {
+            "description" : "Not Modified"
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "http",
+          "httpMethod" : "DELETE",
+          "passthroughBehavior" : "when_no_match",
+          "uri" : "https://${stageVariables.URI_ELB}/B/amqp/removeQueues/{customerId}/{eventId}",
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'*'",
+                "method.response.header.ETag" : "integration.response.header.ETag"
+              }
+            },
+            "304" : {
+              "statusCode" : "304"
+            }
+          },
+          "requestParameters" : {
+            "integration.request.header.Access-Token" : "method.request.header.Access-Token",
+            "integration.request.header.If-None-Match" : "method.request.header.If-None-Match",
+            "integration.request.path.customerId" : "method.request.path.customerId",
+            "integration.request.path.eventId" : "method.request.path.eventId"
+          }
+        },
+        "security" : [ {
+          "UserPool_DEV" : [ ]
+        } ]
+      },
+      "options" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'DELETE,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,Access-Token'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "mock"
+        }
+      }
+    },
+    "/amqp/testScan" : {
+      "post" : {
+        "tags" : [ "amqp-controller" ],
+        "summary" : "testScanC1",
+        "operationId" : "testScanC1UsingPOST",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Access-Token",
+          "in" : "header",
+          "description" : "Token for Authentication",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "If-None-Match",
+          "in" : "header",
+          "description" : "If-None-Match header for ETag",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "scanData",
+          "description" : "scanData",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ScanLogVO"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResponseOfVoid"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "ETag" : {
+                "type" : "string"
+              }
+            }
+          },
+          "201" : {
+            "description" : "Created"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "304" : {
+            "description" : "Not Modified"
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "http",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "uri" : "https://${stageVariables.URI_ELB}/B/amqp/testScan",
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'*'",
+                "method.response.header.ETag" : "integration.response.header.ETag"
+              }
+            },
+            "304" : {
+              "statusCode" : "304"
+            }
+          },
+          "requestParameters" : {
+            "integration.request.header.Access-Token" : "method.request.header.Access-Token",
+            "integration.request.header.If-None-Match" : "method.request.header.If-None-Match"
+          }
+        },
+        "security" : [ {
+          "UserPool_DEV" : [ ]
+        } ]
+      },
+      "options" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'POST,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,Access-Token'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "mock"
+        }
+      }
+    },
+    "/getValidTicketNumbers" : {
+      "post" : {
+        "tags" : [ "scan-controller" ],
+        "summary" : "getvalidTicketNumbers",
+        "operationId" : "getvalidTicketNumbersUsingPOST_1",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Access-Token",
+          "in" : "header",
+          "description" : "Token for Authentication",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "If-None-Match",
+          "in" : "header",
+          "description" : "If-None-Match header for ETag",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "eventVenueDateVO",
+          "description" : "eventVenueDateVO",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/EventVenueDateVO"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResponseOfTicketNumbersVO"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "ETag" : {
+                "type" : "string"
+              }
+            }
+          },
+          "201" : {
+            "description" : "Created"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "304" : {
+            "description" : "Not Modified"
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "http",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "uri" : "https://${stageVariables.URI_ELB}/B/getValidTicketNumbers",
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'*'",
+                "method.response.header.ETag" : "integration.response.header.ETag"
+              }
+            },
+            "304" : {
+              "statusCode" : "304"
+            }
+          },
+          "requestParameters" : {
+            "integration.request.header.Access-Token" : "method.request.header.Access-Token",
+            "integration.request.header.If-None-Match" : "method.request.header.If-None-Match"
+          }
+        },
+        "security" : [ {
+          "UserPool_DEV" : [ ]
+        } ]
+      },
+      "options" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'POST,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,Access-Token'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "mock"
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "ResponseOfVoid" : {
+      "type" : "object",
+      "properties" : {
+        "responseCode" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "responseMessage" : {
+          "type" : "string"
+        }
+      }
+    },
+    "TicketNumberAndStatus" : {
+      "type" : "object",
+      "properties" : {
+        "accessControl" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "flagMessage" : {
+          "type" : "string"
+        },
+        "isFlagged" : {
+          "type" : "boolean"
+        },
+        "isTimedTicket" : {
+          "type" : "boolean"
+        },
+        "status" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "ticketBarcode" : {
+          "type" : "string"
+        },
+        "ticketId" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "ticketNumber" : {
+          "type" : "string"
+        },
+        "validityEndTime" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "validityStartTime" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      }
+    },
+    "EventVenueDateVO" : {
+      "type" : "object",
+      "properties" : {
+        "eventId" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "lastSyncTime" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "venueId" : {
+          "type" : "integer",
+          "format" : "int64"
+        }
+      }
+    },
+    "CustomerIdEventIdVO" : {
+      "type" : "object",
+      "properties" : {
+        "customerId" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "eventId" : {
+          "type" : "integer",
+          "format" : "int64"
+        }
+      }
+    },
+    "ScanLogVO" : {
+      "type" : "object",
+      "properties" : {
+        "barCode" : {
+          "type" : "string"
+        },
+        "customerId" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "dateTime" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "employeeId" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "eventId" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "gateWindowId" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "id" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "ticketNumber" : {
+          "type" : "string"
+        },
+        "venueId" : {
+          "type" : "integer",
+          "format" : "int64"
+        }
+      }
+    },
+    "TicketNumbersVO" : {
+      "type" : "object",
+      "properties" : {
+        "employeeIds" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/EmployeeAlphanumericVO"
+          }
+        },
+        "lastSyncTime" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "ticketNumbers" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/TicketNumberAndStatus"
+          }
+        }
+      }
+    },
+    "ResponseOfTicketNumbersVO" : {
+      "type" : "object",
+      "properties" : {
+        "responseCode" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "responseMessage" : {
+          "type" : "string"
+        },
+        "responseObject" : {
+          "$ref" : "#/definitions/TicketNumbersVO"
+        }
+      }
+    },
+    "EmployeeAlphanumericVO" : {
+      "type" : "object",
+      "properties" : {
+        "alphaNumericId" : {
+          "type" : "string"
+        },
+        "employeeId" : {
+          "type" : "integer",
+          "format" : "int64"
+        }
+      }
+    },
+    "Empty" : {
+      "type" : "object"
+    }
+  },
+  "securityDefinitions" : {
+    "UserPool_DEV" : {
+      "type" : "apiKey",
+      "name" : "Authorization",
+      "in" : "header",
+      "x-amazon-apigateway-authtype" : "cognito_user_pools",
+      "x-amazon-apigateway-authorizer" : {
+        "providerARNs" : [ "arn:aws:cognito-idp:us-west-2:105906274816:userpool/us-west-2_2" ],
+        "type" : "cognito_user_pools"
+      }
+    }
+  }
+}

@@ -1,0 +1,1384 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "A Api Documentation",
+    "version" : "1.0",
+    "title" : "A Api Documentation",
+    "termsOfService" : "urn:tos",
+    "contact" : { },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
+  "host" : "35.166.48.189:8080",
+  "basePath" : "/payment",
+  "tags" : [ {
+    "name" : "payment-controller",
+    "description" : "Payment Controller"
+  } ],
+  "paths" : {
+    "/generateKey" : {
+      "post" : {
+        "tags" : [ "payment-controller" ],
+        "summary" : "generateKey",
+        "operationId" : "generateKeyUsingPOST_1",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Access-Token",
+          "in" : "header",
+          "description" : "Token for Authentication",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "If-None-Match",
+          "in" : "header",
+          "description" : "If-None-Match header for ETag",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "customerIdVO",
+          "description" : "customerIdVO",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CustomerIdVO"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResponseOfGenerateKeyResponseVO"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "ETag" : {
+                "type" : "string"
+              }
+            }
+          },
+          "201" : {
+            "description" : "Created"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "304" : {
+            "description" : "Not Modified"
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "http",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "uri" : "https://${stageVariables.URI_ELB}/A/generateKey",
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'*'",
+                "method.response.header.ETag" : "integration.response.header.ETag"
+              }
+            },
+            "304" : {
+              "statusCode" : "304"
+            }
+          },
+          "requestParameters" : {
+            "integration.request.header.Access-Token" : "method.request.header.Access-Token",
+            "integration.request.header.If-None-Match" : "method.request.header.If-None-Match"
+          }
+        },
+        "security" : [ {
+          "UserPool_DEV" : [ ]
+        } ]
+      },
+      "options" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'POST,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,Access-Token'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "mock"
+        }
+      }
+    },
+    "/generateManifest" : {
+      "post" : {
+        "tags" : [ "payment-controller" ],
+        "summary" : "generateManifest",
+        "operationId" : "generateManifestUsingPOST_1",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Access-Token",
+          "in" : "header",
+          "description" : "Token for Authentication",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "If-None-Match",
+          "in" : "header",
+          "description" : "If-None-Match header for ETag",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "manifestVO",
+          "description" : "manifestVO",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ManifestVO"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResponseOfstring"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "ETag" : {
+                "type" : "string"
+              }
+            }
+          },
+          "201" : {
+            "description" : "Created"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "304" : {
+            "description" : "Not Modified"
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "http",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "uri" : "https://${stageVariables.URI_ELB}/A/generateManifest",
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'*'",
+                "method.response.header.ETag" : "integration.response.header.ETag"
+              }
+            },
+            "304" : {
+              "statusCode" : "304"
+            }
+          },
+          "requestParameters" : {
+            "integration.request.header.Access-Token" : "method.request.header.Access-Token",
+            "integration.request.header.If-None-Match" : "method.request.header.If-None-Match"
+          }
+        },
+        "security" : [ {
+          "UserPool_DEV" : [ ]
+        } ]
+      },
+      "options" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'POST,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,Access-Token'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "mock"
+        }
+      }
+    },
+    "/paymentPaxRefund" : {
+      "post" : {
+        "tags" : [ "payment-controller" ],
+        "summary" : "paymentPaxRefund",
+        "operationId" : "paymentPaxRefundUsingPOST_1",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Access-Token",
+          "in" : "header",
+          "description" : "Token for Authentication",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "If-None-Match",
+          "in" : "header",
+          "description" : "If-None-Match header for ETag",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "returnRequestVO",
+          "description" : "returnRequestVO",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/SwipeReturnRequestVO"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResponseOfReturnResponseVO"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "ETag" : {
+                "type" : "string"
+              }
+            }
+          },
+          "201" : {
+            "description" : "Created"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "304" : {
+            "description" : "Not Modified"
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "http",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "uri" : "https://${stageVariables.URI_ELB}/A/paymentPaxRefund",
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'*'",
+                "method.response.header.ETag" : "integration.response.header.ETag"
+              }
+            },
+            "304" : {
+              "statusCode" : "304"
+            }
+          },
+          "requestParameters" : {
+            "integration.request.header.Access-Token" : "method.request.header.Access-Token",
+            "integration.request.header.If-None-Match" : "method.request.header.If-None-Match"
+          }
+        },
+        "security" : [ {
+          "UserPool_DEV" : [ ]
+        } ]
+      },
+      "options" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'POST,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,Access-Token'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "mock"
+        }
+      }
+    },
+    "/paymentRefund" : {
+      "post" : {
+        "tags" : [ "payment-controller" ],
+        "summary" : "paymentRefund",
+        "operationId" : "paymentRefundUsingPOST",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Access-Token",
+          "in" : "header",
+          "description" : "Token for Authentication",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "If-None-Match",
+          "in" : "header",
+          "description" : "If-None-Match header for ETag",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "paymentReturnRequestVO",
+          "description" : "paymentReturnRequestVO",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/PaymentReturnRequestVO"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResponseOfReturnResponseVO"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "ETag" : {
+                "type" : "string"
+              }
+            }
+          },
+          "201" : {
+            "description" : "Created"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "304" : {
+            "description" : "Not Modified"
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "http",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "uri" : "https://${stageVariables.URI_ELB}/A/paymentRefund",
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'*'",
+                "method.response.header.ETag" : "integration.response.header.ETag"
+              }
+            },
+            "304" : {
+              "statusCode" : "304"
+            }
+          },
+          "requestParameters" : {
+            "integration.request.header.Access-Token" : "method.request.header.Access-Token",
+            "integration.request.header.If-None-Match" : "method.request.header.If-None-Match"
+          }
+        },
+        "security" : [ {
+          "UserPool_DEV" : [ ]
+        } ]
+      },
+      "options" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'POST,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,Access-Token'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "mock"
+        }
+      }
+    },
+    "/paymentSale" : {
+      "post" : {
+        "tags" : [ "payment-controller" ],
+        "summary" : "paymentSale",
+        "operationId" : "paymentSaleUsingPOST_1",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Access-Token",
+          "in" : "header",
+          "description" : "Token for Authentication",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "If-None-Match",
+          "in" : "header",
+          "description" : "If-None-Match header for ETag",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "cardDetails",
+          "description" : "cardDetails",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CardDetailBaseVO"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResponseOfSaleResponseVO"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "ETag" : {
+                "type" : "string"
+              }
+            }
+          },
+          "201" : {
+            "description" : "Created"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "304" : {
+            "description" : "Not Modified"
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "http",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "uri" : "https://${stageVariables.URI_ELB}/A/paymentSale",
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'*'",
+                "method.response.header.ETag" : "integration.response.header.ETag"
+              }
+            },
+            "304" : {
+              "statusCode" : "304"
+            }
+          },
+          "requestParameters" : {
+            "integration.request.header.Access-Token" : "method.request.header.Access-Token",
+            "integration.request.header.If-None-Match" : "method.request.header.If-None-Match"
+          }
+        },
+        "security" : [ {
+          "UserPool_DEV" : [ ]
+        } ]
+      },
+      "options" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'POST,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,Access-Token'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "mock"
+        }
+      }
+    },
+    "/paymentVoid" : {
+      "post" : {
+        "tags" : [ "payment-controller" ],
+        "summary" : "paymentVoid",
+        "operationId" : "paymentVoidUsingPOST",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Access-Token",
+          "in" : "header",
+          "description" : "Token for Authentication",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "If-None-Match",
+          "in" : "header",
+          "description" : "If-None-Match header for ETag",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "voidRequestVO",
+          "description" : "voidRequestVO",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/PaymentVoidRequestVO"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResponseOfPaymentVoidResponseVO"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "ETag" : {
+                "type" : "string"
+              }
+            }
+          },
+          "201" : {
+            "description" : "Created"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "304" : {
+            "description" : "Not Modified"
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "http",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "uri" : "https://${stageVariables.URI_ELB}/A/paymentVoid",
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'*'",
+                "method.response.header.ETag" : "integration.response.header.ETag"
+              }
+            },
+            "304" : {
+              "statusCode" : "304"
+            }
+          },
+          "requestParameters" : {
+            "integration.request.header.Access-Token" : "method.request.header.Access-Token",
+            "integration.request.header.If-None-Match" : "method.request.header.If-None-Match"
+          }
+        },
+        "security" : [ {
+          "UserPool_DEV" : [ ]
+        } ]
+      },
+      "options" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'POST,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,Access-Token'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "mock"
+        }
+      }
+    },
+    "/sale" : {
+      "post" : {
+        "tags" : [ "payment-controller" ],
+        "summary" : "sale",
+        "operationId" : "saleUsingPOST",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Access-Token",
+          "in" : "header",
+          "description" : "Token for Authentication",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "If-None-Match",
+          "in" : "header",
+          "description" : "If-None-Match header for ETag",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "saleVO",
+          "description" : "saleVO",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/SaleVO"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResponseOfSaleResponseVO"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "ETag" : {
+                "type" : "string"
+              }
+            }
+          },
+          "201" : {
+            "description" : "Created"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "304" : {
+            "description" : "Not Modified"
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "http",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "uri" : "https://${stageVariables.URI_ELB}/A/sale",
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'*'",
+                "method.response.header.ETag" : "integration.response.header.ETag"
+              }
+            },
+            "304" : {
+              "statusCode" : "304"
+            }
+          },
+          "requestParameters" : {
+            "integration.request.header.Access-Token" : "method.request.header.Access-Token",
+            "integration.request.header.If-None-Match" : "method.request.header.If-None-Match"
+          }
+        },
+        "security" : [ {
+          "UserPool_DEV" : [ ]
+        } ]
+      },
+      "options" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'POST,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,Access-Token'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "mock"
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "ManifestVO" : {
+      "type" : "object",
+      "properties" : {
+        "amount" : {
+          "type" : "string"
+        },
+        "deviceID" : {
+          "type" : "string"
+        },
+        "merchantID" : {
+          "type" : "string"
+        },
+        "transactionKey" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CardDetailBaseVO" : {
+      "type" : "object",
+      "properties" : {
+        "cardDataSource" : {
+          "type" : "string"
+        },
+        "cardType" : {
+          "type" : "string"
+        },
+        "customerId" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "cvv2" : {
+          "type" : "string"
+        },
+        "expirationDate" : {
+          "type" : "string"
+        },
+        "maskedCardNumber" : {
+          "type" : "string"
+        },
+        "transactionAmount" : {
+          "type" : "string"
+        },
+        "transactionID" : {
+          "type" : "string"
+        },
+        "transactionKey" : {
+          "type" : "string"
+        },
+        "tsepToken" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Sale" : {
+      "type" : "object",
+      "properties" : {
+        "authorizationIndicator" : {
+          "type" : "string"
+        },
+        "cardDataSource" : {
+          "type" : "string"
+        },
+        "cardNumber" : {
+          "type" : "string"
+        },
+        "cardholderAuthenticationMethod" : {
+          "type" : "string"
+        },
+        "cvv2" : {
+          "type" : "string"
+        },
+        "developerID" : {
+          "type" : "string"
+        },
+        "deviceID" : {
+          "type" : "string"
+        },
+        "expirationDate" : {
+          "type" : "string"
+        },
+        "maxPinLength" : {
+          "type" : "string"
+        },
+        "terminalAuthenticationCapability" : {
+          "type" : "string"
+        },
+        "terminalCapability" : {
+          "type" : "string"
+        },
+        "terminalOperatingEnvironment" : {
+          "type" : "string"
+        },
+        "terminalOutputCapability" : {
+          "type" : "string"
+        },
+        "transactionAmount" : {
+          "type" : "string"
+        },
+        "transactionKey" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CustomerIdVO" : {
+      "type" : "object",
+      "properties" : {
+        "customerId" : {
+          "type" : "integer",
+          "format" : "int64"
+        }
+      }
+    },
+    "GenerateKeyResponseVO" : {
+      "type" : "object",
+      "properties" : {
+        "GenerateKeyResponse" : {
+          "$ref" : "#/definitions/GenerateKeyResponse"
+        }
+      }
+    },
+    "SaleResponse" : {
+      "type" : "object",
+      "properties" : {
+        "addressVerificationCode" : {
+          "type" : "string"
+        },
+        "authCode" : {
+          "type" : "string"
+        },
+        "cardType" : {
+          "type" : "string"
+        },
+        "commercialCard" : {
+          "type" : "string"
+        },
+        "customerReceipt" : {
+          "type" : "string"
+        },
+        "cvvVerificationCode" : {
+          "type" : "string"
+        },
+        "expirationDate" : {
+          "type" : "string"
+        },
+        "hostReferenceNumber" : {
+          "type" : "string"
+        },
+        "maskedCardNumber" : {
+          "type" : "string"
+        },
+        "merchantReceipt" : {
+          "type" : "string"
+        },
+        "processedAmount" : {
+          "type" : "string"
+        },
+        "responseCode" : {
+          "type" : "string"
+        },
+        "responseMessage" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "taskID" : {
+          "type" : "string"
+        },
+        "token" : {
+          "type" : "string"
+        },
+        "totalAmount" : {
+          "type" : "string"
+        },
+        "transactionAmount" : {
+          "type" : "string"
+        },
+        "transactionID" : {
+          "type" : "string"
+        },
+        "transactionTimestamp" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ResponseOfReturnResponseVO" : {
+      "type" : "object",
+      "properties" : {
+        "responseCode" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "responseMessage" : {
+          "type" : "string"
+        },
+        "responseObject" : {
+          "$ref" : "#/definitions/ReturnResponseVO"
+        }
+      }
+    },
+    "PaymentReturnRequestVO" : {
+      "type" : "object",
+      "properties" : {
+        "customerId" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "transactionAmount" : {
+          "type" : "string"
+        },
+        "transactionID" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ResponseOfSaleResponseVO" : {
+      "type" : "object",
+      "properties" : {
+        "responseCode" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "responseMessage" : {
+          "type" : "string"
+        },
+        "responseObject" : {
+          "$ref" : "#/definitions/SaleResponseVO"
+        }
+      }
+    },
+    "ReturnResponseVO" : {
+      "type" : "object",
+      "properties" : {
+        "ReturnResponse" : {
+          "$ref" : "#/definitions/ReturnResponse"
+        }
+      }
+    },
+    "SaleVO" : {
+      "type" : "object",
+      "properties" : {
+        "Sale" : {
+          "$ref" : "#/definitions/Sale"
+        }
+      }
+    },
+    "SaleResponseVO" : {
+      "type" : "object",
+      "properties" : {
+        "SaleResponse" : {
+          "$ref" : "#/definitions/SaleResponse"
+        }
+      }
+    },
+    "PaymentVoidResponseVO" : {
+      "type" : "object",
+      "properties" : {
+        "VoidResponse" : {
+          "$ref" : "#/definitions/PaymentVoidResponse"
+        }
+      }
+    },
+    "ResponseOfPaymentVoidResponseVO" : {
+      "type" : "object",
+      "properties" : {
+        "responseCode" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "responseMessage" : {
+          "type" : "string"
+        },
+        "responseObject" : {
+          "$ref" : "#/definitions/PaymentVoidResponseVO"
+        }
+      }
+    },
+    "PaymentVoidResponse" : {
+      "type" : "object",
+      "properties" : {
+        "authCode" : {
+          "type" : "string"
+        },
+        "cardType" : {
+          "type" : "string"
+        },
+        "customerReceipt" : {
+          "type" : "string"
+        },
+        "externalReferenceID" : {
+          "type" : "string"
+        },
+        "hostReferenceNumber" : {
+          "type" : "string"
+        },
+        "maskedCardNumber" : {
+          "type" : "string"
+        },
+        "merchantReceipt" : {
+          "type" : "string"
+        },
+        "orderNumber" : {
+          "type" : "string"
+        },
+        "responseCode" : {
+          "type" : "string"
+        },
+        "responseMessage" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "taskID" : {
+          "type" : "string"
+        },
+        "transactionID" : {
+          "type" : "string"
+        },
+        "transactionTimestamp" : {
+          "type" : "string"
+        },
+        "voidedAmount" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ResponseOfstring" : {
+      "type" : "object",
+      "properties" : {
+        "responseCode" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "responseMessage" : {
+          "type" : "string"
+        },
+        "responseObject" : {
+          "type" : "string"
+        }
+      }
+    },
+    "SwipeReturnRequestVO" : {
+      "type" : "object",
+      "properties" : {
+        "customerId" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "expirationDate" : {
+          "type" : "string"
+        },
+        "token" : {
+          "type" : "string"
+        },
+        "transactionAmount" : {
+          "type" : "string"
+        }
+      }
+    },
+    "GenerateKeyResponse" : {
+      "type" : "object",
+      "properties" : {
+        "jsViewUrl" : {
+          "type" : "string"
+        },
+        "responseCode" : {
+          "type" : "string"
+        },
+        "responseMessage" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "transactionKey" : {
+          "type" : "string"
+        }
+      }
+    },
+    "PaymentVoidRequestVO" : {
+      "type" : "object",
+      "properties" : {
+        "customerId" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "transactionId" : {
+          "type" : "string"
+        },
+        "transactionKey" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ResponseOfGenerateKeyResponseVO" : {
+      "type" : "object",
+      "properties" : {
+        "responseCode" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "responseMessage" : {
+          "type" : "string"
+        },
+        "responseObject" : {
+          "$ref" : "#/definitions/GenerateKeyResponseVO"
+        }
+      }
+    },
+    "ReturnResponse" : {
+      "type" : "object",
+      "properties" : {
+        "cardType" : {
+          "type" : "string"
+        },
+        "customerReceipt" : {
+          "type" : "string"
+        },
+        "expirationDate" : {
+          "type" : "string"
+        },
+        "externalReferenceID" : {
+          "type" : "string"
+        },
+        "maskedCardNumber" : {
+          "type" : "string"
+        },
+        "merchantReceipt" : {
+          "type" : "string"
+        },
+        "orderNumber" : {
+          "type" : "string"
+        },
+        "responseCode" : {
+          "type" : "string"
+        },
+        "responseMessage" : {
+          "type" : "string"
+        },
+        "returnedAmount" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "taskID" : {
+          "type" : "string"
+        },
+        "token" : {
+          "type" : "string"
+        },
+        "transactionAmount" : {
+          "type" : "string"
+        },
+        "transactionID" : {
+          "type" : "string"
+        },
+        "transactionTimestamp" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Empty" : {
+      "type" : "object"
+    }
+  },
+  "securityDefinitions" : {
+    "UserPool_DEV" : {
+      "type" : "apiKey",
+      "name" : "Authorization",
+      "in" : "header",
+      "x-amazon-apigateway-authtype" : "cognito_user_pools",
+      "x-amazon-apigateway-authorizer" : {
+        "providerARNs" : [ "arn:aws:cognito-idp:us-west-2:105906274816:userpool/us-west-2_2" ],
+        "type" : "cognito_user_pools"
+      }
+    }
+  }
+}
